@@ -28,13 +28,24 @@ public class BeatObserver : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// This method is called by each BeatCounter and Pattern counter this object is observing.
+	/// This method is called by each BeatCounter this object is observing.
 	/// </summary>
 	/// <param name="beatType">The beat type that invoked this method.</param>
 	public void BeatNotify (BeatType beatType)
 	{
 		beatMask |= beatType;
 		StartCoroutine(WaitOnBeat(beatType));
+	}
+
+	/// <summary>
+	/// This overloaded method is called by each PatternCounter this object is observing. Since pattern counters contain a sequence of 
+	/// different beat types, keeping track of the beat type isn't necessary. To test for a beat from the pattern counter, the beat mask
+	/// should be checked for the BeatType.OnBeat flag.
+	/// </summary>
+	public void BeatNotify ()
+	{
+		beatMask |= BeatType.OnBeat;
+		StartCoroutine(WaitOnBeat(BeatType.OnBeat));
 	}
 
 	/// <summary>

@@ -19,7 +19,7 @@ public class SphereBehavior : MonoBehaviour {
 
 	void Update ()
 	{
-		if ((beatObserver.beatMask & BeatType.PatternBeat) == BeatType.PatternBeat) {
+		if ((beatObserver.beatMask & BeatType.OnBeat) == BeatType.OnBeat) {
 			transform.position = beatPositions[beatCounter];
 			beatCounter = (++beatCounter == beatPositions.Length ? 0 : beatCounter);
 		}

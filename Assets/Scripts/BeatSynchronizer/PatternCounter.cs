@@ -81,7 +81,7 @@ public class PatternCounter : MonoBehaviour {
 				foreach (GameObject obj in observers) {
 					// Since this is a specific pattern of beats, we don't need to track different beat types.
 					// Instead, client can index a custom beat counter to track which beat in the sequence has fired.
-					obj.GetComponent<BeatObserver>().BeatNotify(BeatType.PatternBeat);
+					obj.GetComponent<BeatObserver>().BeatNotify();
 				}
 				nextBeatSample += samplePeriods[sequenceIndex];
 				sequenceIndex = (++sequenceIndex == beatValues.Length ? 0 : sequenceIndex);

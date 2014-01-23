@@ -18,17 +18,16 @@ namespace SynchronizerData {
 		WhoteDottedBeat
 	}
 
-	// BeatType is used to specify whether the beat value is an off-beat, normal beat (i.e. occurs in time with the 
-	// expected beats in the music, not syncopated), a down-beat, or a pattern beat (a beat that occurs in the pattern counter).
-	// This value is sent along with the notify message of when a beat occurs so that different action
+	// BeatType is used to specify whether the beat value is an off-beat, on-beat, up-beat, or a down-beat.
+	// This value is sent along with the notify message when a beat occurs so that different action
 	// may be taken for the different beat types.
 	// This information is stored in a beatMask field in each BeatObserver instance.
 	public enum BeatType {
 		None		= 0,
 		OffBeat		= 1,
-		NormalBeat	= 2,
-		DownBeat	= 4,
-		PatternBeat = 8
+		OnBeat		= 2,
+		UpBeat		= 4,
+		DownBeat	= 8
 	};
 
 	// The decimal values associated with each beat value are used in calculating the sample position in the audio

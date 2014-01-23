@@ -20,5 +20,8 @@ public class CubeBehavior : MonoBehaviour {
 		if ((beatObserver.beatMask & BeatType.DownBeat) == BeatType.DownBeat) {
 			anim.SetTrigger("DownBeatTrigger");
 		}
+		if ((beatObserver.beatMask & BeatType.UpBeat) == BeatType.UpBeat) {
+			transform.Rotate(Vector3.forward, 45f);
+		}
 	}
 }

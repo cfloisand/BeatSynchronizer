@@ -201,6 +201,7 @@ Transform:
   - {fileID: 1743212329}
   - {fileID: 537914593}
   - {fileID: 1539198861}
+  - {fileID: 586176519}
   m_Father: {fileID: 0}
 --- !u!1 &537914592
 GameObject:
@@ -212,7 +213,7 @@ GameObject:
   - 4: {fileID: 537914593}
   - 114: {fileID: 537914594}
   m_Layer: 0
-  m_Name: 2-4_beat_counter
+  m_Name: off_beat_counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,11 +244,57 @@ MonoBehaviour:
   beatValue: 7
   syncopation: 5
   behindBeat: 0
-  beatType: 2
+  beatType: 1
   loopTime: 20
   audioSource: {fileID: 31075515}
   observers:
   - {fileID: 1055949763}
+--- !u!1 &586176517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 586176519}
+  - 114: {fileID: 586176518}
+  m_Layer: 0
+  m_Name: up_beat_counter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &586176518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586176517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d506793ee07e645d28f8aea464882c05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beatValue: 9
+  syncopation: 3
+  behindBeat: 1
+  beatType: 4
+  loopTime: 20
+  audioSource: {fileID: 31075515}
+  observers:
+  - {fileID: 598910837}
+--- !u!4 &586176519
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 586176517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 155035476}
 --- !u!1 &598910837
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +429,7 @@ Light:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1055949763}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Type: 2
   m_Color: {r: .363539487, g: .985294104, b: .246323526, a: .90196079}
@@ -762,7 +809,7 @@ MonoBehaviour:
   beatValue: 9
   syncopation: 0
   behindBeat: 0
-  beatType: 4
+  beatType: 8
   loopTime: 20
   audioSource: {fileID: 31075515}
   observers:

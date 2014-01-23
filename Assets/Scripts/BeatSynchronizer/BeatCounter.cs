@@ -13,7 +13,7 @@ public class BeatCounter : MonoBehaviour {
 	public BeatValue beatValue = BeatValue.QuarterBeat;
 	public BeatValue syncopation = BeatValue.None;
 	public bool behindBeat = false;
-	public BeatType beatType = BeatType.NormalBeat;
+	public BeatType beatType = BeatType.OnBeat;
 	public float loopTime = 30f;
 	public AudioSource audioSource;
 	public GameObject[] observers;

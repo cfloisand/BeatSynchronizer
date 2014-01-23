@@ -6,7 +6,7 @@ using SynchronizerData;
 public class LightBehavior : MonoBehaviour {
 
 	[Range(0f, 500f)]
-	public float blinkDuration = 20f;	// milliseconds
+	public float blinkDuration = 30f;	// milliseconds
 
 	private BeatObserver beatObserver;
 
@@ -19,7 +19,7 @@ public class LightBehavior : MonoBehaviour {
 
 	void Update ()
 	{
-		if ((beatObserver.beatMask & BeatType.NormalBeat) == BeatType.NormalBeat) {
+		if ((beatObserver.beatMask & BeatType.OffBeat) == BeatType.OffBeat) {
 			StartCoroutine(LightBlink());
 		}
 	}
