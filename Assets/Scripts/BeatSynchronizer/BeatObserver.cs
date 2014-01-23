@@ -4,8 +4,9 @@ using SynchronizerData;
 
 /// <summary>
 /// This script needs to be added to any object that will observe a beat counter or pattern counter, and will receive notification
-/// when a beat happens in the source audio through setting a bit mask whose bits correspond to specific beat types. The observing 
-/// object should contain a script that polls for the current value of beatMask. When this value is non-zero, a beat has just fired. 
+/// when a beat happens in the source audio through setting a bit mask whose bits correspond to specific beat types. For objects observing 
+/// the pattern counter, the beat type is always OnBeat. 
+/// The observing object should contain a script that polls for the current value of beatMask. When this value is non-zero, a beat has just fired. 
 /// The beatWindow field specifies (in milliseconds) how long the beat stays active for, effectively behaving as a sensitivity/tolerance 
 /// setting.
 /// </summary>

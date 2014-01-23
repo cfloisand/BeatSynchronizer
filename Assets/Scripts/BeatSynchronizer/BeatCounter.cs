@@ -4,15 +4,15 @@ using SynchronizerData;
 
 /// <summary>
 /// This class is responsible for counting and notifying its observers when a beat occurs, specified by beatValue.
-/// A syncopation value can be set to offset the beat (if reversed, the syncopation happens "behind" the beat).
+/// An offset beat value can be set to shift the beat (e.g. to create syncopation). If the offset is negative, it shifts to the left (behind the beat).
 /// The accuracy of the beat counter is handled by loopTime, which controls how often it checks whether a beat has happened.
 /// Higher settings for loopTime decreases load on the CPU, but will result in less accurate beat synchronization.
 /// </summary>
 public class BeatCounter : MonoBehaviour {
 	
 	public BeatValue beatValue = BeatValue.QuarterBeat;
-	public BeatValue syncopation = BeatValue.None;
-	public bool behindBeat = false;
+	public BeatValue beatOffset = BeatValue.None;
+	public bool negativeBeatOffset = false;
 	public BeatType beatType = BeatType.OnBeat;
 	public float loopTime = 30f;
 	public AudioSource audioSource;
@@ -20,7 +20,7 @@ public class BeatCounter : MonoBehaviour {
 	
 	private float nextBeatSample;
 	private float samplePeriod;
-	private float syncopationOffset;
+	private float sampleOffset;
 	private float currentSample;
 	private float previousSample;
 
@@ -31,11 +31,10 @@ public class BeatCounter : MonoBehaviour {
 		float audioBpm = audioSource.GetComponent<BeatSynchronizer>().bpm;
 		samplePeriod = (60f / (audioBpm * BeatDecimalValues.values[(int)beatValue])) * audioSource.clip.frequency;
 
-		if (syncopation != BeatValue.None) {
-			syncopationOffset = (60f / (audioBpm * BeatDecimalValues.values[(int)syncopation])) * audioSource.clip.frequency;
-			// Reverse direction of syncopation, effectively shifting it to behind the beat (i.e. pickups, etc.)
-			if (behindBeat) {
-				syncopationOffset = samplePeriod - syncopationOffset;
+		if (beatOffset != BeatValue.None) {
+			sampleOffset = (60f / (audioBpm * BeatDecimalValues.values[(int)beatOffset])) * audioSource.clip.frequency;
+			if (negativeBeatOffset) {
+				sampleOffset = samplePeriod - sampleOffset;
 			}
 		}
 
@@ -84,7 +83,7 @@ public class BeatCounter : MonoBehaviour {
 				nextBeatSample = 0f;
 			}
 			
-			if (currentSample >= (nextBeatSample + syncopationOffset)) {
+			if (currentSample >= (nextBeatSample + sampleOffset)) {
 				foreach (GameObject obj in observers) {
 					obj.GetComponent<BeatObserver>().BeatNotify(beatType);
 				}

@@ -242,8 +242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatValue: 7
-  syncopation: 5
-  behindBeat: 0
+  beatOffset: 5
+  negativeBeatOffset: 0
   beatType: 1
   loopTime: 20
   audioSource: {fileID: 31075515}
@@ -277,8 +277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatValue: 9
-  syncopation: 3
-  behindBeat: 1
+  beatOffset: 3
+  negativeBeatOffset: 1
   beatType: 4
   loopTime: 20
   audioSource: {fileID: 31075515}
@@ -807,8 +807,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   beatValue: 9
-  syncopation: 0
-  behindBeat: 0
+  beatOffset: 0
+  negativeBeatOffset: 0
   beatType: 8
   loopTime: 20
   audioSource: {fileID: 31075515}

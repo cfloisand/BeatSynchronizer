@@ -15,7 +15,7 @@ namespace SynchronizerData {
 		HalfBeat,
 		HalfDottedBeat,
 		WholeBeat,
-		WhoteDottedBeat
+		WholeDottedBeat
 	}
 
 	// BeatType is used to specify whether the beat value is an off-beat, on-beat, up-beat, or a down-beat.

@@ -13,8 +13,8 @@ public class BeatCounterEditor : Editor {
 		targetObject.beatValue = (BeatValue)EditorGUILayout.EnumPopup("Beat value", targetObject.beatValue);
 		EditorGUILayout.Space ();
 
-		targetObject.syncopation = (BeatValue)EditorGUILayout.EnumPopup("Syncopation", targetObject.syncopation);
-		targetObject.behindBeat = EditorGUILayout.Toggle("Behind beat ?", targetObject.behindBeat);
+		targetObject.beatOffset = (BeatValue)EditorGUILayout.EnumPopup("Offset", targetObject.beatOffset);
+		targetObject.negativeBeatOffset = EditorGUILayout.Toggle("Negative offset", targetObject.negativeBeatOffset);
 		EditorGUILayout.Space ();
 
 		targetObject.beatType = (BeatType)EditorGUILayout.EnumPopup("Beat type", targetObject.beatType);

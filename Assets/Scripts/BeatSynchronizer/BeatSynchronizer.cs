@@ -9,7 +9,7 @@ using System.Collections;
 public class BeatSynchronizer : MonoBehaviour {
 
 	public float bpm = 120f;		// Tempo in beats per minute of the audio clip.
-	public float startDelay = 1f;	//Number of seconds to delay the start of audio playback.
+	public float startDelay = 1f;	// Number of seconds to delay the start of audio playback.
 	public delegate void AudioStartAction();
 	public static event AudioStartAction OnAudioStart;
 	
