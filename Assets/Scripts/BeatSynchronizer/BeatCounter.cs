@@ -18,28 +18,37 @@ public class BeatCounter : MonoBehaviour {
 	public AudioSource audioSource;
 	public GameObject[] observers;
 	
-	private float nextBeatSample;
-	private float samplePeriod;
-	private float sampleOffset;
-	private float currentSample;
-	private float previousSample;
+	private double nextBeatSample;
+	private double samplePeriod;
+	private double sampleOffset;
+	private double currentSample;
 
 	
 	void Awake ()
 	{
 		// Calculate number of samples between each beat.
 		float audioBpm = audioSource.GetComponent<BeatSynchronizer>().bpm;
-		samplePeriod = (60f / (audioBpm * BeatDecimalValues.values[(int)beatValue])) * audioSource.clip.frequency;
+		samplePeriod = (60d / (audioBpm * BeatDecimalValues.values[(int)beatValue])) * audioSource.clip.frequency;
 
 		if (beatOffset != BeatValue.None) {
-			sampleOffset = (60f / (audioBpm * BeatDecimalValues.values[(int)beatOffset])) * audioSource.clip.frequency;
+			sampleOffset = (60d / (audioBpm * BeatDecimalValues.values[(int)beatOffset])) * audioSource.clip.frequency;
 			if (negativeBeatOffset) {
 				sampleOffset = samplePeriod - sampleOffset;
 			}
 		}
 
-		nextBeatSample = 0f;
-		previousSample = 0f;
+		nextBeatSample = 0d;
+	}
+
+	/// <summary>
+	/// Initializes and starts the coroutine that checks for beat occurrences. The nextBeatSample field is initialized to 
+	/// exactly match up with the sample that corresponds to the time the audioSource clip started playing (via PlayScheduled).
+	/// </summary>
+	/// <param name="syncTime">Equal to the audio system's dsp time plus the specified delay time.</param>
+	void StartBeatCheck (double syncTime)
+	{
+		nextBeatSample = syncTime * audioSource.clip.frequency;
+		StartCoroutine(BeatCheck());
 	}
 	
 	/// <summary>
@@ -47,23 +56,23 @@ public class BeatCounter : MonoBehaviour {
 	/// </summary>
 	void OnEnable ()
 	{
-		BeatSynchronizer.OnAudioStart += () => { StartCoroutine(BeatCheck()); };
+		BeatSynchronizer.OnAudioStart += StartBeatCheck;
 	}
 
 	/// <summary>
 	/// Unsubscribe the BeatCheck() coroutine from the beat synchronizer's event.
 	/// </summary>
 	/// <remarks>
-	/// This should NOT (and does not) call StopCoroutine. It simply removes the lambda function that was added to the
+	/// This should NOT (and does not) call StopCoroutine. It simply removes the function that was added to the
 	/// event delegate in OnEnable().
 	/// </remarks>
 	void OnDisable ()
 	{
-		BeatSynchronizer.OnAudioStart -= () => { StartCoroutine(BeatCheck()); };
+		BeatSynchronizer.OnAudioStart -= StartBeatCheck;
 	}
 
 	/// <summary>
-	/// This method checks if a beat has occurred in the audio by comparing the current sample position of the playhead 
+	/// This method checks if a beat has occurred in the audio by comparing the current sample position of the audio system's dsp time 
 	/// to the next expected sample value of the beat. The frequency of the checks is controlled by the loopTime field.
 	/// </summary>
 	/// <remarks>
@@ -74,14 +83,8 @@ public class BeatCounter : MonoBehaviour {
 	/// </remarks>
 	IEnumerator BeatCheck ()
 	{
-		while (audioSource.isPlaying) {
-			currentSample = audioSource.timeSamples;
-			
-			// Only reset the next beat sample counter when the audio clip has wrapped.
-			// This is the simplest and most reliable way of doing this.
-			if (currentSample < previousSample) {
-				nextBeatSample = 0f;
-			}
+		while (true) {
+			currentSample = AudioSettings.dspTime * audioSource.clip.frequency;
 			
 			if (currentSample >= (nextBeatSample + sampleOffset)) {
 				foreach (GameObject obj in observers) {
@@ -89,8 +92,6 @@ public class BeatCounter : MonoBehaviour {
 				}
 				nextBeatSample += samplePeriod;
 			}
-			
-			previousSample = currentSample;
 
 			yield return new WaitForSeconds(loopTime / 1000f);
 		}

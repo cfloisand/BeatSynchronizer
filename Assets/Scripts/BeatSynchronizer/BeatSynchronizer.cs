@@ -10,24 +10,17 @@ public class BeatSynchronizer : MonoBehaviour {
 
 	public float bpm = 120f;		// Tempo in beats per minute of the audio clip.
 	public float startDelay = 1f;	// Number of seconds to delay the start of audio playback.
-	public delegate void AudioStartAction();
+	public delegate void AudioStartAction(double syncTime);
 	public static event AudioStartAction OnAudioStart;
+
+	private double initTime;
 	
 	
 	void Start ()
 	{
-		StartCoroutine(StartAudio());
-	}
-	
-	IEnumerator StartAudio ()
-	{
-		yield return new WaitForSeconds(startDelay);
-		
-		audio.Play();
-		
-		if (OnAudioStart != null) {
-			OnAudioStart();
-		}
+		initTime = AudioSettings.dspTime;
+		audio.PlayScheduled(initTime + startDelay);
+		OnAudioStart(initTime + startDelay);
 	}
 
 }
