@@ -12,15 +12,15 @@ public class BeatSynchronizer : MonoBehaviour {
 	public float startDelay = 1f;	// Number of seconds to delay the start of audio playback.
 	public delegate void AudioStartAction(double syncTime);
 	public static event AudioStartAction OnAudioStart;
-
-	private double initTime;
 	
 	
 	void Start ()
 	{
-		initTime = AudioSettings.dspTime;
+		double initTime = AudioSettings.dspTime;
 		audio.PlayScheduled(initTime + startDelay);
-		OnAudioStart(initTime + startDelay);
+		if (OnAudioStart != null) {
+			OnAudioStart(initTime + startDelay);
+		}
 	}
 
 }

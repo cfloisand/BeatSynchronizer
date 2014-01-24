@@ -101,7 +101,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 40078808473194cb0b407eb5db3c54fb, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: .800000012
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm: 112.800003
-  startDelay: 1
+  startDelay: 2
 --- !u!1 &92531343
 GameObject:
   m_ObjectHideFlags: 0

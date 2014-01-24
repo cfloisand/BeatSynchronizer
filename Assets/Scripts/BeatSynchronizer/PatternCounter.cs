@@ -14,23 +14,23 @@ public class PatternCounter : MonoBehaviour {
 	public AudioSource audioSource;
 	public GameObject[] observers;
 	
-	private double nextBeatSample;
-	private double[] samplePeriods;
+	private float nextBeatSample;
+	private float[] samplePeriods;
 	private int sequenceIndex;
-	private double currentSample;
+	private float currentSample;
 	
 	
 	void Awake ()
 	{
 		float audioBpm = audioSource.GetComponent<BeatSynchronizer>().bpm;
-		samplePeriods = new double[beatValues.Length];
+		samplePeriods = new float[beatValues.Length];
 
 		// Calculate number of samples between each beat in the sequence.
 		for (int i = 0; i < beatValues.Length; ++i) {
-			samplePeriods[i] = (60d / (audioBpm * BeatDecimalValues.values[(int)beatValues[i]])) * audioSource.clip.frequency;
+			samplePeriods[i] = (60f / (audioBpm * BeatDecimalValues.values[(int)beatValues[i]])) * audioSource.clip.frequency;
 		}
 		
-		nextBeatSample = 0d;
+		nextBeatSample = 0f;
 		sequenceIndex = 0;
 	}
 
@@ -41,7 +41,7 @@ public class PatternCounter : MonoBehaviour {
 	/// <param name="syncTime">Equal to the audio system's dsp time plus the specified delay time.</param>
 	void StartPatternCheck (double syncTime)
 	{
-		nextBeatSample = syncTime * audioSource.clip.frequency;
+		nextBeatSample = (float)syncTime * audioSource.clip.frequency;
 		StartCoroutine(PatternCheck());
 	}
 
@@ -77,8 +77,8 @@ public class PatternCounter : MonoBehaviour {
 	/// </remarks>
 	IEnumerator PatternCheck ()
 	{
-		while (true) {
-			currentSample = AudioSettings.dspTime * audioSource.clip.frequency;
+		while (audioSource.isPlaying) {
+			currentSample = (float)AudioSettings.dspTime * audioSource.clip.frequency;
 			
 			if (currentSample >= nextBeatSample) {
 				foreach (GameObject obj in observers) {
