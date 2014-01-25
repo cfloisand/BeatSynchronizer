@@ -10,6 +10,7 @@ using SynchronizerData;
 public class PatternCounter : MonoBehaviour {
 
 	public BeatValue[] beatValues;
+	public int beatScalar = 1;
 	public float loopTime = 30f;
 	public AudioSource audioSource;
 	public GameObject[] observers;
@@ -28,6 +29,7 @@ public class PatternCounter : MonoBehaviour {
 		// Calculate number of samples between each beat in the sequence.
 		for (int i = 0; i < beatValues.Length; ++i) {
 			samplePeriods[i] = (60f / (audioBpm * BeatDecimalValues.values[(int)beatValues[i]])) * audioSource.clip.frequency;
+			samplePeriods[i] *= beatScalar;
 		}
 		
 		nextBeatSample = 0f;

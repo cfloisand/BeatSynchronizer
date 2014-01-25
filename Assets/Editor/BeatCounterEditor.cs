@@ -11,6 +11,7 @@ public class BeatCounterEditor : Editor {
 		var targetObject = (BeatCounter)target;
 
 		targetObject.beatValue = (BeatValue)EditorGUILayout.EnumPopup("Beat value", targetObject.beatValue);
+		targetObject.beatScalar = EditorGUILayout.IntSlider("Scalar", targetObject.beatScalar, 1, 10);
 		EditorGUILayout.Space ();
 
 		targetObject.beatOffset = (BeatValue)EditorGUILayout.EnumPopup("Offset", targetObject.beatOffset);

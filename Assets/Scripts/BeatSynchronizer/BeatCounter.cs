@@ -11,6 +11,7 @@ using SynchronizerData;
 public class BeatCounter : MonoBehaviour {
 	
 	public BeatValue beatValue = BeatValue.QuarterBeat;
+	public int beatScalar = 1;
 	public BeatValue beatOffset = BeatValue.None;
 	public bool negativeBeatOffset = false;
 	public BeatType beatType = BeatType.OnBeat;
@@ -37,6 +38,8 @@ public class BeatCounter : MonoBehaviour {
 			}
 		}
 
+		samplePeriod *= beatScalar;
+		sampleOffset *= beatScalar;
 		nextBeatSample = 0f;
 	}
 

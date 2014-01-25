@@ -18,6 +18,7 @@ public class PatternCounterEditor : Editor {
 		if (EditorGUI.EndChangeCheck())
 			serializedObject.ApplyModifiedProperties();
 		//EditorGUIUtility.LookLikeControls();
+		targetObject.beatScalar = EditorGUILayout.IntSlider("Scalar", targetObject.beatScalar, 1, 10);
 		EditorGUILayout.Space ();
 
 		targetObject.loopTime = EditorGUILayout.Slider("Loop time", targetObject.loopTime, 0f, 500f);
