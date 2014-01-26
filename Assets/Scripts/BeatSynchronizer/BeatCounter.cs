@@ -98,6 +98,8 @@ public class BeatCounter : MonoBehaviour {
 
 			yield return new WaitForSeconds(loopTime / 1000f);
 		}
+
+		yield return null;
 	}
 
 }

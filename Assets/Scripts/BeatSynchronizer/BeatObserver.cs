@@ -57,6 +57,7 @@ public class BeatObserver : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(beatWindow / 1000f);
 		beatMask ^= beatType;
+		yield return null;
 	}
 
 }

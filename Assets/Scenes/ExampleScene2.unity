@@ -1427,7 +1427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatValues: 070000000500000005000000
   beatScalar: 4
-  loopTime: 35
+  loopTime: 15
   audioSource: {fileID: 1693126089}
   observers:
   - {fileID: 1273113371}

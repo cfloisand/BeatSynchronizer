@@ -94,6 +94,8 @@ public class PatternCounter : MonoBehaviour {
 
 			yield return new WaitForSeconds(loopTime / 1000f);
 		}
+
+		yield return null;
 	}
 
 }
