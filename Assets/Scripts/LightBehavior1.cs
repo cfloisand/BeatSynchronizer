@@ -19,7 +19,7 @@ public class LightBehavior1 : MonoBehaviour {
 	void Update ()
 	{
 		if ((beatObserver.beatMask & BeatType.OnBeat) == BeatType.OnBeat) {
-			light.color = colorSequence[beatCounter];
+			GetComponent<Light>().color = colorSequence[beatCounter];
 			beatCounter = (++beatCounter == colorSequence.Length ? 0 : beatCounter);
 		}
 	}

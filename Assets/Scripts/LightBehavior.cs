@@ -14,7 +14,7 @@ public class LightBehavior : MonoBehaviour {
 	void Start ()
 	{
 		beatObserver = GetComponent<BeatObserver>();
-		light.enabled = false;
+		GetComponent<Light>().enabled = false;
 	}
 
 	void Update ()
@@ -26,8 +26,8 @@ public class LightBehavior : MonoBehaviour {
 
 	IEnumerator LightBlink ()
 	{
-		light.enabled = true;
+		GetComponent<Light>().enabled = true;
 		yield return new WaitForSeconds(blinkDuration / 1000f);
-		light.enabled = false;
+		GetComponent<Light>().enabled = false;
 	}
 }

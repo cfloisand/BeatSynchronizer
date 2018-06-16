@@ -25,15 +25,15 @@ public class FpsDisplay : MonoBehaviour {
 		if (timeLeft <= 0f) {
 			float fps = accumTime / frameCount;
 			string fpsDisplay = System.String.Format("Current framerate: {0:F2}", fps);
-			guiText.text = fpsDisplay;
+			GetComponent<GUIText>().text = fpsDisplay;
 			
 			if (fps < 30)
-				guiText.material.color = Color.yellow;
+				GetComponent<GUIText>().material.color = Color.yellow;
 			else 
 				if (fps < 10)
-					guiText.material.color = Color.red;
+					GetComponent<GUIText>().material.color = Color.red;
 			else
-				guiText.material.color = Color.green;
+				GetComponent<GUIText>().material.color = Color.green;
 
 			timeLeft = updateInterval;
 			accumTime = 0f;
